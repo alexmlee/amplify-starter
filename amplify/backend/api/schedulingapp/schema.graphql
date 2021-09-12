@@ -1,0 +1,21 @@
+type Note @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type GroupSchedule @model {
+  id: ID!
+  name: String!
+  description: String
+  isWeekend: Boolean!
+  individualSchedules: [IndividualSchedule] @connection(keyName: "byGroupSchedule", fields: ["id"])
+}
+
+type IndividualSchedule @model @key(name: "byGroupSchedule", fields: ["groupScheduleID"]) {
+  id: ID!
+  user: String!
+  groupScheduleID: ID!
+  comments: String
+}
+
